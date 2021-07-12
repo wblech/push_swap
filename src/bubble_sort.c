@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-static void swap(int *xp, int *yp)
+static void bubble_swap(int *xp, int *yp)
 {
     int temp = *xp;
 
@@ -19,7 +19,7 @@ void bubble_sort(int *arr, int size)
         while (j < size - i - 1)
         {
             if (arr[j] > arr[j + 1])
-                swap(&arr[j], &arr[j + 1]);
+                bubble_swap(&arr[j], &arr[j + 1]);
             j++;
         }
         j = 0;
