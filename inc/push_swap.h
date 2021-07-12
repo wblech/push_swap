@@ -11,5 +11,6 @@
 # endif
 
 void ft_error(t_error error);
+void bubble_sort(int *arr, int size);
 
 #endif
