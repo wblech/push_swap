@@ -2,8 +2,10 @@ DIR_OBJ = .objs
 DIR_SRC = src
 DIR_INC = ./inc
 DIR_LIBFT = ./libft
-SRCS = 	$(DIR_SRC)/main.c \
+SRCS = 	$(DIR_SRC)/bubble_sort.c \
+		$(DIR_SRC)/main.c \
 		$(DIR_SRC)/ft_error.c
+		
 
 NAME = push_swap
 OBJ = $(patsubst $(DIR_SRC)/%.c, $(DIR_OBJ)/%.o, $(SRCS))

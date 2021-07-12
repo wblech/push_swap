@@ -60,6 +60,36 @@ bool  is_sorted(int *arr, int size)
     return is_sorted;
 }
 
+bool is_duplicated(int *arr, int size)
+{
+    int *sorted;
+    int i;
+    bool is_duplicated;
+
+    is_duplicated = false;
+    sorted = (int *)malloc(sizeof(int) * size);
+    i = 0;
+    while(i < size)
+    {
+        sorted[i] = arr[i];
+        i++;
+    }
+    bubble_sort(sorted, size);
+    i = 0;
+    while (i < size && !is_duplicated)
+    {
+        if ((sorted[i] - sorted[i + 1]) == 0)
+            is_duplicated = true;
+        i++;
+    }
+    free(sorted);
+    return is_duplicated;
+}
+
+// todo precisa refatorar código duplicado
+// precisa arrumar norminette
+// precisa arrumar tamanho do argc 
+// precisa organizar código
 int *validate_argv(int argc, char const *argv[])
 {
     t_error error;
@@ -77,13 +107,12 @@ int *validate_argv(int argc, char const *argv[])
         free(int_arr);
         int_arr = NULL;
     }
-    else if (is_duplicated(int_arr, argc))
+    else if (is_duplicated(int_arr, argc - 1))
     {
         ft_error(eduplicated);
         free(int_arr);
         int_arr = NULL;
     }
-
     return int_arr;
 }
 
@@ -98,6 +127,6 @@ int main(int argc, char const *argv[])
     arr = validate_argv(argc, argv);
     if (!arr)
         return(1);
-    while(i < argc)
+    while(i < argc - 1)
         ft_putnbr_fd(arr[i++], STDOUT_FILENO);
 }
