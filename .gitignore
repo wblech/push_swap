@@ -2,3 +2,4 @@
 .objs
 *.o
 push_swap
+tester.c
