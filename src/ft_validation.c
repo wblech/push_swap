@@ -28,22 +28,45 @@ static bool validate_is_digit(int size, char const *argv[])
     return (is_digit);
 }
 
+bool is_valid_int(long long int nbr)
+{
+    long long int max_int;
+    long long int min_int;
+    bool is_valid;
+
+    max_int = 2147483647;
+    min_int = -2147483648;
+    is_valid = true;
+    if(nbr > max_int || nbr < min_int)
+        is_valid = false;
+    return is_valid;
+}
+
 static int *convert_to_vint(int size, char const *argv[])
 {
     int i;
     int *ret_arr;
+    long long int tmp;
+    bool is_valid;
 
     i = 1;
     ret_arr = (int *)malloc(sizeof(int) * size);
-    while((i - 1) < size)
+    is_valid = true;
+    while((i - 1) < size && is_valid)
     {
-        ret_arr[i - 1] = ft_atoi(argv[i]);
+        if((is_valid = is_valid_int(tmp = ft_atolli(argv[i]))))
+            ret_arr[i - 1] = (int)tmp;
+        else
+        {
+            free(ret_arr);
+            ret_arr = NULL;
+        }
         i++;
     }
     return ret_arr;
 }
 
-static bool  is_sorted(int *arr, int size)
+bool  is_sorted(int *arr, int size)
 {
     int i;
     int last_pos;
@@ -54,27 +77,33 @@ static bool  is_sorted(int *arr, int size)
     is_sorted = true;
     while(i < last_pos && is_sorted)
     {
-        if (arr[i] > arr[i + 1])
+        if (arr[i] >= arr[i + 1])
             is_sorted = false;
         i++;
     }
     return is_sorted;
 }
 
-static bool is_duplicated(int *arr, int size)
+void arr_int_cpy(int *dst, int *src, int size)
 {
-    int *sorted;
+    int i;
+
+    i = 0;
+    while(i < size)
+    {
+        dst[i] = src[i];
+        i++;
+    }
+}
+
+static bool is_duplicated(int *arr, int size, int *sorted)
+{
     int i;
     bool is_duplicated;
 
     is_duplicated = false;
-    sorted = (int *)malloc(sizeof(int) * size);
     i = 0;
-    while(i < size)
-    {
-        sorted[i] = arr[i];
-        i++;
-    }
+    arr_int_cpy(sorted, arr, size);
     bubble_sort(sorted, size);
     i = 0;
     while (i < size && !is_duplicated)
@@ -83,11 +112,10 @@ static bool is_duplicated(int *arr, int size)
             is_duplicated = true;
         i++;
     }
-    free(sorted);
     return is_duplicated;
 }
 
-int *get_valid_int_arr(int size, char const *argv[])
+int *get_valid_int_arr(int size, char const *argv[], int *sorted)
 {
     t_error error;
     int *int_arr;
@@ -97,10 +125,13 @@ int *get_valid_int_arr(int size, char const *argv[])
     if (!validate_is_digit(size, argv))
         ft_error(error = enotdigit);
     if (!error)
-        int_arr = convert_to_vint(size, argv);
-    if (error || !int_arr || is_sorted(int_arr, size))
-        int_arr = print_error_free_arr(esorted, int_arr);
-    else if (is_duplicated(int_arr, size))
+    {
+        if(!(int_arr = convert_to_vint(size, argv)))
+            ft_error(error = emaxint);
+    }
+    if (error || is_sorted(int_arr, size))
+        int_arr = print_error_free_arr(esorted_or_invalid_int, int_arr);
+    else if (is_duplicated(int_arr, size, sorted))
         int_arr = print_error_free_arr(eduplicated, int_arr);
     return int_arr;
 }

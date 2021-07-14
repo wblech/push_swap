@@ -6,7 +6,7 @@ typedef enum e_error
     no_error,
     enull,
     eduplicated,
-    esorted,
+    esorted_or_invalid_int,
     enotdigit,
     emaxint
 } t_error;

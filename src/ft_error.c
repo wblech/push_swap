@@ -9,6 +9,7 @@ void ft_error(t_error error)
 void *print_error_free_arr(t_error error, int *arr)
 {
     ft_error(error);
-    free(arr);
+    if(arr != NULL)
+        free(arr);
     return(NULL);
 }

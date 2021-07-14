@@ -19,6 +19,7 @@ typedef struct s_stack
 
 typedef struct s_holder
 {
+    int *sorted;
     t_stack *a_stack;
     t_stack *b_stack;
 } t_holder;
@@ -46,7 +47,8 @@ void bubble_sort(int *arr, int size);
 /*
 * ft_validation.c
 */
-int *get_valid_int_arr(int size, char const *argv[]);
+int *get_valid_int_arr(int size, char const *argv[], int *sorted);
+bool  is_sorted(int *arr, int size);
 
 /*
 * ft_stack_utils.c
@@ -78,5 +80,14 @@ void rr(t_holder *holder);
 */
 void reverse_rotate(t_stack *stack, bool is_rrr);
 void rrr(t_holder *holder);
+
+/*
+* small_sort.c
+*/
+void sort_2(t_stack *a_stack);
+void sort_3(t_stack *a_stack);
+void sort_4(t_holder *holder);
+void sort_5(t_holder *holder);
+void small_sort(t_holder *holder);
 
 #endif
