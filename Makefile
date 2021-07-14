@@ -12,6 +12,7 @@ SRCS = 	$(DIR_SRC)/bubble_sort.c \
 		$(DIR_SRC)/op_push.c \
 		$(DIR_SRC)/op_rotate.c \
 		$(DIR_SRC)/op_reverse_rotate.c \
+		$(DIR_SRC)/small_sort.c \
 		$(DIR_SRC)/tester.c #precisa remover
 		
 

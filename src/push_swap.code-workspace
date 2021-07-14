@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"name": "push_swap",
+			"path": ".."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"stdlib.h": "c",
+			"push_swap.h": "c",
+			"algorithm": "c",
+			"stdio.h": "c",
+			"libftprintf.h": "c"
+		}
+	}
+}

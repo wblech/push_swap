@@ -15,7 +15,7 @@ t_stack *create_stack(unsigned int size, int *arr, t_name name)
     return(stack);
 }
 
-t_holder *create_holder(int size, int *int_arr)
+t_holder *create_holder(int size, int *int_arr, int *sorted)
 {
     t_holder *holder;
     int *b_buffer;
@@ -24,6 +24,7 @@ t_holder *create_holder(int size, int *int_arr)
     holder = (t_holder *)malloc(sizeof(t_holder) * 1);
     if (!holder)
         return holder;
+    holder->sorted = sorted;
     holder->a_stack = create_stack(size, int_arr, a);
     holder->b_stack = create_stack(size, b_buffer, b);
     return holder;
@@ -32,18 +33,28 @@ t_holder *create_holder(int size, int *int_arr)
 t_holder *get_valid_holder(int argc, char const *argv[])
 {
     int *int_arr;
+    int *sorted;
     int size;
     t_holder *holder;
 
     int_arr = NULL;
     size = argc - 1;
-    int_arr = get_valid_int_arr(size, argv);
+    sorted = (int *)malloc(sizeof(int) * size);
+    int_arr = get_valid_int_arr(size, argv, sorted);
     if(!int_arr)
+    {
         holder = NULL;
+        free(sorted);
+        sorted = NULL;
+    }
     else
-        holder = create_holder(size, int_arr);
+        holder = create_holder(size, int_arr, sorted);
     if(!holder)
+    {
         free(int_arr);
+        if(sorted != NULL)
+            free(sorted);
+    }
     return holder;
 }
 
@@ -61,5 +72,6 @@ void free_holder(t_holder *holder)
 {
     free_stack(holder->a_stack);
     free_stack(holder->b_stack);
+    free(holder->sorted);
     free(holder);
 }
