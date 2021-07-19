@@ -66,13 +66,13 @@ static int *convert_to_vint(int size, char const *argv[])
     return ret_arr;
 }
 
-bool  is_sorted(int *arr, int size)
+bool  is_sorted(int *arr, int size, int top)
 {
     int i;
     int last_pos;
     bool is_sorted;
 
-    i = 0;
+    i = top;
     last_pos = size - 1;
     is_sorted = true;
     while(i < last_pos && is_sorted)
@@ -129,7 +129,7 @@ int *get_valid_int_arr(int size, char const *argv[], int *sorted)
         if(!(int_arr = convert_to_vint(size, argv)))
             ft_error(error = emaxint);
     }
-    if (error || is_sorted(int_arr, size))
+    if (error || is_sorted(int_arr, size, 0))
         int_arr = print_error_free_arr(esorted_or_invalid_int, int_arr);
     else if (is_duplicated(int_arr, size, sorted))
         int_arr = print_error_free_arr(eduplicated, int_arr);

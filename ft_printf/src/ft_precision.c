@@ -62,9 +62,7 @@ static char		*ft_precision_str(t_printf *elem)
 {
 	int		len;
 	char	*new;
-	int		i;
 
-	i = 0;
 	len = elem->size_precision;
 	new = (char *)ft_calloc((len + 1), 1);
 	ft_strncpy(new, elem->value, len);

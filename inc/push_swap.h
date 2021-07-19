@@ -48,7 +48,7 @@ void bubble_sort(int *arr, int size);
 * ft_validation.c
 */
 int *get_valid_int_arr(int size, char const *argv[], int *sorted);
-bool  is_sorted(int *arr, int size);
+bool  is_sorted(int *arr, int size, int top);
 
 /*
 * ft_stack_utils.c
