@@ -44,10 +44,8 @@ static void	ft_create_width_smaller(t_printf *elem, char *new)
 char		*ft_width(t_printf *elem)
 {
 	int		dif;
-	int		i;
 	char	*new;
 
-	i = 0;
 	if (elem->isneg && elem->size_precision < 0)
 	{
 		update_value(elem, ft_strjoin("-", elem->value));

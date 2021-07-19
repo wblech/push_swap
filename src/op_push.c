@@ -20,5 +20,8 @@ void push(t_stack *stack_add, t_stack *stack_removed)
     stack_add->arr[new_top] = stack_removed->arr[stack_removed->top];
     stack_add->top = new_top;
     pop(stack_removed);
-    ft_printf("p%c\n", stack_add->name);
+    ft_putstr_fd("p", STDOUT_FILENO);
+    ft_putchar_fd(stack_add->name, STDOUT_FILENO);
+    ft_putstr_fd("\n", STDOUT_FILENO);
+    // ft_printf("p%c\n", stack_add->name);
 }

@@ -18,7 +18,12 @@ void rotate(t_stack *stack, bool is_rr)
     }
     stack->arr[last_index] = tmp;
     if(!is_rr)
-        ft_printf("r%c\n", stack->name);
+    {
+        ft_putstr_fd("r", STDOUT_FILENO);
+        ft_putchar_fd(stack->name, STDOUT_FILENO);
+        ft_putstr_fd("\n", STDOUT_FILENO);
+    }
+        // ft_printf("r%c\n", stack->name);
 }
 
 void rr(t_holder *holder)

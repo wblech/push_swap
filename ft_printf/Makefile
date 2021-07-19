@@ -29,16 +29,10 @@ $(NAME): $(OBJ)
 				$(AR) $(NAME) $(OBJ)
 				ranlib $(NAME)
 
-# $(LIBFT):
-# 				$(MAKE) -C $(DIR_LIBFT)
-# 				mv $(LIBFT) $(NAME)
-
 clean:
-			# $(MAKE) -C $(DIR_LIBFT) clean
 			$(RM) $(OBJ)
 
 fclean: clean
-			# $(MAKE) -C $(DIR_LIBFT) fclean
 			$(RM) $(NAME)
 
 re: fclean all

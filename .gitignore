@@ -3,3 +3,5 @@
 *.o
 push_swap
 tester.c
+checker_Mac
+*.a

@@ -10,6 +10,8 @@ void sort_3(t_stack *a_stack)
     int *arr;
 
     arr = a_stack->arr;
+    if(is_sorted(a_stack->arr, a_stack->size, a_stack->top))
+        return ;
     if(arr[a_stack->top + 2] > arr[a_stack->top] && arr[a_stack->top] > arr[a_stack->top + 1])
         swap(a_stack, false);
     else if(arr[a_stack->top] > arr[a_stack->top + 1] && arr[a_stack->top + 1] > arr[a_stack->top + 2])
@@ -61,7 +63,7 @@ void sort_5(t_holder *holder)
             push(b_stack, a_stack);
         else
             rotate(a_stack, false);
-    }      
+    }
     sort_3(a_stack);
     if(b_stack->arr[b_stack->top] < b_stack->arr[b_stack->top + 1])
         sort_2(b_stack);

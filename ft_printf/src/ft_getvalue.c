@@ -44,9 +44,6 @@ static void		ft_getvalue_char(t_printf *elem, va_list *args)
 
 void			ft_getvalue(t_printf *elem, va_list *args)
 {
-	int i;
-
-	i = 0;
 	if (elem->type_char == 's')
 		update_value(elem, va_arg(*args, char *));
 	if (elem->type_char == 'd' || elem->type_char == 'i')

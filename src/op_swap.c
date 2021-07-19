@@ -14,7 +14,12 @@ void swap(t_stack *stack, bool is_ss)
     stack->arr[stack->top] = stack->arr[second_element_index];
     stack->arr[second_element_index] = temp;
     if(!is_ss)
-        ft_printf("ss%c \n", stack->name);
+    {
+        ft_putstr_fd("s", STDOUT_FILENO);
+        ft_putchar_fd(stack->name, STDOUT_FILENO);
+        ft_putstr_fd("\n", STDOUT_FILENO);
+    }
+        // ft_printf("ss%c \n", stack->name);
 }
 
 void ss(t_holder *holder)

@@ -12,8 +12,7 @@ SRCS = 	$(DIR_SRC)/bubble_sort.c \
 		$(DIR_SRC)/op_push.c \
 		$(DIR_SRC)/op_rotate.c \
 		$(DIR_SRC)/op_reverse_rotate.c \
-		$(DIR_SRC)/small_sort.c \
-		$(DIR_SRC)/tester.c #precisa remover
+		$(DIR_SRC)/small_sort.c 
 		
 
 NAME = push_swap
@@ -43,11 +42,13 @@ $(PRINTF):
 all:	$(NAME)
 
 clean:
+	$(MAKE) -C $(DIR_PRINTF) clean
 	$(MAKE) -C $(DIR_LIBFT) clean
 	$(RM) $(OBJ)
 
 
 fclean:	clean
+		$(MAKE) -C $(DIR_PRINTF) fclean
 		$(MAKE) -C $(DIR_LIBFT) fclean
 		$(RM) $(NAME)
 
