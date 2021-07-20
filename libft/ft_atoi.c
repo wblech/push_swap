@@ -14,28 +14,23 @@
 
 int	ft_atoi(const char *str)
 {
-	unsigned long long int	nbr;
-	int						index;
-	int						sign;
+	int	neg;
+	int	nb;
 
-	nbr = 0;
-	sign = 1;
-	index = 0;
-	while (ft_isspace(str[index]))
-		index++;
-	if (str[index] == '-' || str[index] == '+')
+	neg = 1;
+	nb = 0;
+	while (ft_isspace(*str))
+		str++;
+	if (*str == '-' || *str == '+')
 	{
-		sign = (str[index] == '-') ? -1 : 1;
-		index++;
+		if (*str == '-')
+			neg = -1;
+		str++;
 	}
-	while (ft_isdigit(str[index]))
+	while (*str >= '0' && *str <= '9')
 	{
-		nbr *= 10;
-		nbr += str[index++] - '0';
+		nb = (*str - '0') + (nb * 10);
+		str++;
 	}
-	if (nbr > (unsigned long long int)LONG_MAX && sign == 1)
-		return (-1);
-	if (nbr > (unsigned long long int)(-LONG_MIN) && sign == -1)
-		return (0);
-	return ((int)(nbr * sign));
+	return (nb * neg);
 }

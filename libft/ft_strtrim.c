@@ -12,9 +12,9 @@
 
 #include "libft.h"
 
-static	int		ft_findchar(const char *set, char c)
+static	int	ft_findchar(const char *set, char c)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while ((char)set[i])
@@ -26,21 +26,21 @@ static	int		ft_findchar(const char *set, char c)
 	return (0);
 }
 
-static	int		ft_start(char const *s1, char const *set, int i)
+static	int	ft_start(char const *s1, char const *set, int i)
 {
 	while (ft_findchar(set, (char)s1[i]))
 		i++;
 	return (i);
 }
 
-static	int		ft_end(char const *s1, char const *set, int i)
+static	int	ft_end(char const *s1, char const *set, int i)
 {
 	while (ft_findchar(set, (char)s1[i]))
 		i--;
 	return (i);
 }
 
-char			*ft_strtrim(char const *s1, char const *set)
+char	*ft_strtrim(char const *s1, char const *set)
 {
 	char	*cpy;
 	int		lstindex;

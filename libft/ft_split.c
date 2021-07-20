@@ -12,82 +12,66 @@
 
 #include "libft.h"
 
-/*
-**	Count how many words a string has,
-**  with character c as a space character.
-*/
-
-static int	word_count(const char *str, char c)
+static size_t	ft_countchar(const char *s, char c, int opt_delimit)
 {
-	int i;
-	int trigger;
+	size_t	i;
 
 	i = 0;
-	trigger = 0;
-	while (*str)
+	if (opt_delimit)
 	{
-		if (*str != c && trigger == 0)
-		{
-			trigger = 1;
+		while (s[i] && s[i] != c)
 			i++;
-		}
-		else if (*str == c)
-			trigger = 0;
-		str++;
+	}
+	else
+	{
+		while (s[i] && s[i] == c)
+			i++;
 	}
 	return (i);
 }
 
-/*
-**	Returns a substring from str, with
-** 	char zero at index start and finishing
-**	the copy at index finish.
-*/
-
-static char	*word_dup(const char *str, int start, int finish)
-{
-	char	*word;
-	int		i;
-
-	i = 0;
-	word = malloc(((finish - start) * sizeof(char)) + 1);
-	while (start < finish)
-		word[i++] = str[start++];
-	word[i] = '\0';
-	return (word);
-}
-
-/*
-**	Split a string into one or more substrings,
-**	returning an array of substrings. The split
-**	is made according the separator c.
-*/
-
-char		**ft_split(char const *s, char c)
+static size_t	ft_countword(const char *str, char c)
 {
 	size_t	i;
-	size_t	j;
-	int		index;
-	char	**split;
+	size_t	nb_words;
+
+	i = 0;
+	nb_words = 0;
+	while (str[i] && str[i] == c)
+		i++;
+	while (str[i])
+	{
+		while (str[i] && str[i] != c)
+			i++;
+		nb_words++;
+		while (str[i] && str[i] == c)
+			i++;
+	}
+	return (nb_words);
+}
+
+char	**ft_split(char const *s, char c)
+{
+	char	**array;
+	size_t	nb_words;
+	size_t	i;
 
 	if (!s)
 		return (NULL);
 	i = 0;
-	j = 0;
-	index = -1;
-	if (!(split = malloc((word_count(s, c) + 1) * sizeof(char *))))
+	nb_words = ft_countword(s, c);
+	array = malloc((nb_words + 1) * sizeof(char *));
+	if (!array)
 		return (NULL);
-	while (i <= ft_strlen(s))
+	while (i < nb_words)
 	{
-		if (s[i] != c && index < 0)
-			index = i;
-		else if ((s[i] == c || i == ft_strlen(s)) && index >= 0)
-		{
-			split[j++] = word_dup(s, index, i);
-			index = -1;
-		}
+		s += ft_countchar(s, c, 0);
+		array[i] = ft_substr(s, 0, ft_countchar(s, c, 1));
+		if (!array[i])
+			return (NULL);
+		s += ft_countchar(s, c, 1) + ft_countchar(s, c, 0);
 		i++;
 	}
-	split[j] = NULL;
-	return (split);
+	array[i] = NULL;
+	return (array);
 }
