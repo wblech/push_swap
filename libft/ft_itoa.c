@@ -12,42 +12,53 @@
 
 #include "libft.h"
 
-char	*createstr(char *a, int n, int sign, int size)
+static size_t	ft_countsize(int n)
 {
-	while (size >= 0)
+	size_t	count;
+
+	if (n == 0)
+		return (1);
+	count = 0;
+	while (n != 0)
 	{
-		if (sign < 0 && size == 0)
-			return (a);
-		a[size] = (n % 10) + 48;
 		n /= 10;
-		size--;
+		++count;
 	}
-	return (a);
+	return (count);
+}
+
+static int	ft_isneg(int n)
+{
+	if (n < 0)
+		return (-1);
+	return (1);
 }
 
 char	*ft_itoa(int n)
 {
-	int		nbr;
-	int		sign;
-	int		size;
-	char	*a;
+	int		neg;
+	size_t	i;
+	char	*str;
+	long	nbr;
 
-	size = 0;
-	sign = 1;
-	if (n == -2147483648)
-		return (ft_strdup("-2147483648"));
-	if (n < 0)
-		sign = -1;
-	nbr = n * sign;
-	while (nbr /= 10)
-		size++;
-	(sign < 0) ? size++ : size;
-	a = ft_newstr(size + 1);
-	if (a == NULL)
+	nbr = n;
+	i = 0;
+	neg = ft_isneg(nbr);
+	if (neg == -1)
+		i = 1;
+	nbr *= neg;
+	i += ft_countsize(nbr);
+	str = ft_calloc(sizeof(char), (i + 1));
+	if (!str)
 		return (NULL);
-	if (sign < 0)
-		a[0] = '-';
-	a[ft_strlen(a)] = '\0';
-	n *= sign;
-	return (createstr(a, n, sign, size));
+	if (n == 0)
+		str[i] = '0';
+	while (nbr > 0)
+	{
+		str[i--] = (nbr % 10) + '0';
+		nbr /= 10;
+	}
+	if (neg == -1)
+		str[i] = '-';
+	return (str);
 }

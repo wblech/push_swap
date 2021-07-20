@@ -12,9 +12,9 @@
 
 #include "libft.h"
 
-static	int		lstsize(t_list *lst)
+static	int	lstsize(t_list *lst)
 {
-	int count;
+	int	count;
 
 	count = 0;
 	while (lst != NULL)
@@ -27,7 +27,7 @@ static	int		lstsize(t_list *lst)
 
 static	t_list	*lstnew(void *content)
 {
-	t_list *new;
+	t_list	*new;
 
 	new = malloc(sizeof(t_list));
 	if (new == NULL)
@@ -39,7 +39,7 @@ static	t_list	*lstnew(void *content)
 
 static	void	lstadd_back(t_list **lst, t_list *new)
 {
-	t_list *begin;
+	t_list	*begin;
 
 	if ((*lst) != NULL)
 	{
@@ -66,7 +66,7 @@ static	void	lstclear(t_list **lst, void (*del)(void *))
 	lst = NULL;
 }
 
-t_list			*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
 	t_list	*begin;
 	t_list	*new;

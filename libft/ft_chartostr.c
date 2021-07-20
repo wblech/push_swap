@@ -14,7 +14,7 @@
 
 char	*ft_chartostr(char c)
 {
-	char *str;
+	char	*str;
 
 	str = (char *)malloc(2 * sizeof(char));
 	if (str == NULL)
