@@ -3,7 +3,7 @@
 void	ft_error(t_error error)
 {
 	if (error == enotdigit || error == eduplicated || error == emaxint)
-		ft_putstr_fd("Error", STDERR_FILENO);
+		ft_putstr_fd("Error\n", STDERR_FILENO);
 }
 
 void	*print_error_free_arr(t_error error, int *arr)
