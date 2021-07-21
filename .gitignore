@@ -6,3 +6,4 @@ tester.c
 checker_Mac
 *.a
 push_swap.code-workspace
+.venv
