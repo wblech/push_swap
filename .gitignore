@@ -7,3 +7,4 @@ checker_Mac
 *.a
 push_swap.code-workspace
 .venv
+checker_linux
